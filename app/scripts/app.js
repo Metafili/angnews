@@ -17,14 +17,23 @@ var app = angular.module('angNewsApp', [
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
-  ]);
+    'ngTouch',
+    'firebase'
+  ])
+.constant('FIREBASE_URL', 'https://PUT-YOUR-FIREBASE-URL-HERE.firebaseio.com/');
 
 app.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/posts.html',
-        controller: 'PostsCtrl',
-      })
+    templateUrl: 'views/posts.html',
+    controller: 'PostsCtrl'
+  })
+  .when('/posts/:postId', {
+    templateUrl: 'views/showpost.html',
+    controller: 'PostViewCtrl'
+  })
+  .otherwise({
+    redirectTo: '/'
+  });
       
   });
